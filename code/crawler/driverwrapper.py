@@ -17,8 +17,56 @@ from selenium.webdriver.common.keys \
 
 class DriverWrapper:
     def __init__(self):
+        self.user_data_dir = r'D:\tmp\automated chrome'
+        self.driver = None
 
-        pass
+        self.options = None
+        self.service = None
+
+        self.headless = False
+
+    def is_headless(self):
+        return self.headless
+
+    def set_headless(self, v):
+        self.headless = v
+
+    def setup(self):
+        self.driver = webdriver.Chrome(service=self.get_service(), options=self.get_options())
+
+    def setup_default_options(self):
+        options = webdriver.ChromeOptions()
+        options.add_argument('user-data-dir=' + r'D:\tmp\automated chrome')
+
+        if self.is_headless():
+            options.add_argument('--headless')
+
+        self.set_options(options)
+
+        return self.get_options()
+
+    def setup_default_service(self):
+        self.set_service(ChromeService(ChromeDriverManager().install()))
+        return self.get_service()
+
+    def get_service(self):
+        if self.service is None:
+           return self.setup_default_service()
+
+        return self.service
+
+    def get_options(self):
+        if self.options is None:
+            self.setup_default_options()
+
+        return self.options
+
+    def set_options(self, v):
+        self.options = v
+
+    def set_service(self, service):
+        self.service = service
+
 
 
 
