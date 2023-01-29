@@ -1,6 +1,12 @@
-def main():
+from application \
+    import Application
 
-    pass
+
+def main():
+    app = Application()
+    app.initiate()
+    app.execute()
+    app.cleanup()
 
 
 if __name__ == '__main__':
