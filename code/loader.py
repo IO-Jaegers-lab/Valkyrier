@@ -20,8 +20,6 @@ def load_files(path_to):
             if not f == '.gitignore':
                 array_to_return.append(full_dir)
 
-    print(array_to_return)
-
     return array_to_return
 
 
@@ -46,7 +44,7 @@ class Loader:
         f = open(path, "r")
 
         for rl in f.readlines():
-            if len(rl) >= 3 and not rl.isspace():
+            if len(rl) >= 1 and not rl.isspace():
                 self.link(rl)
 
         f.close()

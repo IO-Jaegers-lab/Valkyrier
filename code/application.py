@@ -1,8 +1,13 @@
 from domain \
     import Domain
 
-from escape \
+from keys.escape \
     import Escape
+
+from keys.ready \
+    import IsReady
+
+import time
 
 
 class Application:
@@ -12,19 +17,29 @@ class Application:
 
         self.domain_area = Domain()
         self.domain_area.set_application(self)
+        self.ready = IsReady()
 
     def initiate(self):
+        print("initiate")
         pass
 
     def execute(self):
+        print("execution")
+        print("press Y to work")
+        print("press ESCAPE to leave")
+
         while self.get_is_running():
-            self.get_domain_area().operate()
+            if self.ready.is_ready():
+                self.get_domain_area().operate()
+            else:
+                time.sleep(1)
 
             if self.listener_escape.fetch_and_is_escape():
                 self.flag_exit()
 
     def cleanup(self):
-        pass
+        print("cleanup")
+        self.domain_area.done()
 
     def flag_exit(self):
         self.set_is_running(False)

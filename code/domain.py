@@ -4,6 +4,8 @@ from crawler.crawler \
 from loader \
     import Loader
 
+import time
+
 
 class Domain:
     def __init__(self):
@@ -15,8 +17,17 @@ class Domain:
         self.loader.load()
 
     def operate(self):
+        if not self.crawler.isDone():
+            self.process()
+        else:
+            self.application.flag_exit()
 
-        pass
+    def process(self):
+        self.crawler.load()
+        time.sleep(2)
+
+    def done(self):
+        self.crawler.done()
 
     def set_application(self, withApp):
         self.application = withApp

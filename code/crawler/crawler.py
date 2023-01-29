@@ -14,7 +14,17 @@ class Crawler:
         self.buffer = Buffer()
         self.history = History()
 
-    def insert( self, href ):
-        if not str( href ).isspace():
-            self.buffer.append( href )
+    def insert(self, href):
+        self.buffer.append(href)
 
+    def load(self):
+        current = self.buffer.current()
+        self.wrapper.goto(current)
+
+        self.wrapper.sleep()
+
+    def isDone(self):
+        return self.buffer.is_empty()
+
+    def done(self):
+        self.wrapper.done()

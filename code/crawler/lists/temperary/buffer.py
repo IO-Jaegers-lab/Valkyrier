@@ -1,27 +1,30 @@
 class Buffer:
     def __init__(self):
-        self.buffer = []
+        self.list = []
 
     def get_buffer(self):
-        return self.buffer
+        return self.list
 
-    def set_buffer(self, withSet):
-        self.buffer = withSet
+    def set_buffer(self, with_set):
+        self.list = with_set
 
     def current(self):
-        current = self.buffer[0]
-        self.buffer.pop(0)
+        if self.is_empty():
+            return None
+
+        current = self.list[0]
+        self.list.pop(0)
 
         return current
 
     def append(self, href):
-        if href is str:
-            self.buffer.append(href)
+        array_buffer = self.get_buffer()
+        array_buffer.append(href)
 
     def size(self):
-        return len(self.buffer)
+        return len(self.list)
 
-    def isEmpty(self):
+    def is_empty(self):
         return self.size() == 0
 
 

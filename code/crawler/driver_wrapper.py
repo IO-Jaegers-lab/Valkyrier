@@ -24,6 +24,9 @@ class DriverWrapper:
         self.service = None
 
         self.headless = False
+        self.implicit_wait = 4.0
+
+        self.driver = webdriver.Chrome(service=self.get_service(), options=self.get_options())
 
     def is_headless(self):
         return self.headless
@@ -31,12 +34,13 @@ class DriverWrapper:
     def set_headless(self, v):
         self.headless = v
 
-    def setup(self):
-        self.driver = webdriver.Chrome(service=self.get_service(), options=self.get_options())
+    def done(self):
+        self.driver.close()
 
     def setup_default_options(self):
         options = webdriver.ChromeOptions()
         options.add_argument('user-data-dir=' + r'D:\tmp\automated chrome')
+        options.add_argument('disk-cache-size=1402880000')
 
         self.set_options(options)
 
@@ -45,6 +49,9 @@ class DriverWrapper:
 
         #
         return self.get_options()
+
+    def goto(self, url):
+        self.driver.get(url)
 
     def __setup_headless(self):
         if self.is_headless():
@@ -56,7 +63,7 @@ class DriverWrapper:
 
     def get_service(self):
         if self.service is None:
-           return self.setup_default_service()
+           self.setup_default_service()
 
         return self.service
 
@@ -66,19 +73,24 @@ class DriverWrapper:
 
         return self.options
 
+    def sleep(self):
+        self.driver.implicitly_wait(self.get_implicit_wait())
+
     def set_options(self, v):
         self.options = v
 
     def set_service(self, service):
         self.service = service
 
+    def get_driver(self):
+        return self.driver
 
+    def set_driver(self, driver):
+        self.driver = driver
 
+    def get_implicit_wait(self):
+        return self.implicit_wait
 
-
-
-
-
-
-
+    def set_implicit_wait(self, v):
+        self.implicit_wait = v
 

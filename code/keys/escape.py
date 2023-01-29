@@ -13,3 +13,5 @@ class Escape:
     def fetch_and_is_escape(self):
         if self.waiting_for_keypress():
             return msvcrt.getch().decode() == chr(27)
+
+
