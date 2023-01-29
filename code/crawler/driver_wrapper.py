@@ -38,12 +38,17 @@ class DriverWrapper:
         options = webdriver.ChromeOptions()
         options.add_argument('user-data-dir=' + r'D:\tmp\automated chrome')
 
-        if self.is_headless():
-            options.add_argument('--headless')
-
         self.set_options(options)
 
+        #
+        self.__setup_headless()
+
+        #
         return self.get_options()
+
+    def __setup_headless(self):
+        if self.is_headless():
+            self.get_options().add_argument('--headless')
 
     def setup_default_service(self):
         self.set_service(ChromeService(ChromeDriverManager().install()))
