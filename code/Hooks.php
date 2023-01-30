@@ -38,7 +38,7 @@
 		 * @param string $linkToResource
 		 * @return void
 		 */
-		public function setURL(
+		public function setCURLUrl(
 			string $linkToResource
 		): void
 		{
@@ -47,8 +47,11 @@
 				$linkToResource
 			);
 		}
-		
-		public function execute(): ?string
+	
+		/**
+		 * @return string|null
+		 */
+		public final function execute(): ?string
 		{
 			$rtValue = curl_exec(
 				$this->getHandler()
@@ -88,7 +91,9 @@
 		 * @param CurlHandle|null $value
 		 * @return void
 		 */
-        public function setHandler( ?CurlHandle $value ): void
+        public function setHandler(
+			?CurlHandle $value
+		): void
         {
             $this->handler = $value;
         }

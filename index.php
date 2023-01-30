@@ -1,55 +1,41 @@
 <?php
 	require_once 'vendor/autoload.php';
 	
-	use \IOJaegers\Valkyrier\Hooks;
-	use \IOJaegers\Valkyrier\ScraperTools;
-
-	function query($document): ?array
-	{
-		$rArray = array();
-		$xPath = new DOMXPath($document);
-		
-		foreach ( $xPath->query('//a[@class="image"]') as $item)
-		{
-			array_push($rArray, $item);
-		}
-		
-		return $rArray;
-	};
+	use \IOJaegers\Valkyrier\RequestDocument
+		as RD;
 	
-	class Result
-	{
-		public static ?array $values = null;
-		public static ?int $sizeOf = null;
-	}
+	use \IOJaegers\Valkyrier\Extractor
+		as Extractor;
+	
+	
+	
+	$find = array(l1, l2, l3, l4, l5, l6, l7);
 	
 	echo "====== TEST SCRIPT FOR DEVELOPMENT ========================================\r\n";
+	const class_name = '"image"';
+
+	$index = 0;
+	$sizeOf = count($find);
 	
-	$hooks = new Hooks();
-	
-	$hooks->setURL("");
-	$r_str = $hooks->execute();
-	
-	$document = new DOMDocument();
-	$document->preserveWhiteSpace = false;
-	
-	@ $document->loadHTML($r_str);
-	
-	Result::$values =  query($document);
-	Result::$sizeOf = count(Result::$values);
-	
-	function retrieve($idx):DOMElement
+	for(
+		$index = 0;
+		$index < $sizeOf;
+		$index ++
+	)
 	{
-		$current = Result::$values[$idx];
-		return $current;
+		$current = $find[$index];
+		
+		$extractor1 = new Extractor(
+			new RD(
+				$current
+			),
+			"https://commons.wikimedia.org"
+		);
+		
+		$extracted_1 = $extractor1->retrieveUrlsByClassName( class_name );
+		
+		print_r($extracted_1);
 	}
 	
-	for( $idx = 0; $idx < Result::$sizeOf; $idx++)
-	{
-		$current = retrieve($idx);
-		print_r($current->getAttribute('href'));
-		echo "\r\n";
-	};
 	
-	print(Result::$sizeOf);
 ?>
