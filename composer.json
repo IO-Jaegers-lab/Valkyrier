@@ -1,0 +1,24 @@
+{
+    "name": "io-jaegers/valkyrier",
+    "type": "project",
+    "license": "MIT",
+    "autoload": 
+    {
+        "psr-4": 
+        {
+            "IOJaegers\\Valkyrier\\": "code/"
+        }
+    },
+    "authors": 
+    [
+        {
+            "name": "kent vejrup madsen",
+            "email": "kent.vejrup.madsen@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": 
+    {
+        "ext-curl":"*"
+    }
+}
