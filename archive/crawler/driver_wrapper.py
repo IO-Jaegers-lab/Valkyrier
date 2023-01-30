@@ -8,12 +8,6 @@ from selenium.webdriver.chrome.service \
     import Service \
     as ChromeService
 
-from selenium.webdriver.common.by \
-    import By
-
-from selenium.webdriver.common.keys \
-    import Keys
-
 
 class DriverWrapper:
     def __init__(self):
@@ -24,9 +18,10 @@ class DriverWrapper:
         self.service = None
 
         self.headless = False
-        self.implicit_wait = 4.0
+        self.implicit_wait = 4.5
 
         self.driver = webdriver.Chrome(service=self.get_service(), options=self.get_options())
+        self.driver.minimize_window()
 
     def is_headless(self):
         return self.headless
@@ -74,7 +69,7 @@ class DriverWrapper:
         return self.options
 
     def sleep(self):
-        self.driver.implicitly_wait(self.get_implicit_wait())
+        self.driver.implicitly_wait(self.get_implicit_wait_value())
 
     def set_options(self, v):
         self.options = v
@@ -88,9 +83,9 @@ class DriverWrapper:
     def set_driver(self, driver):
         self.driver = driver
 
-    def get_implicit_wait(self):
+    def get_implicit_wait_value(self):
         return self.implicit_wait
 
-    def set_implicit_wait(self, v):
+    def set_implicit_wait_value(self, v):
         self.implicit_wait = v
 

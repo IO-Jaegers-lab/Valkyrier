@@ -29,13 +29,13 @@ class Application:
         print("press ESCAPE to leave")
 
         while self.get_is_running():
+            if self.listener_escape.fetch_and_is_escape():
+                self.flag_exit()
+
             if self.ready.is_ready():
                 self.get_domain_area().operate()
             else:
                 time.sleep(1)
-
-            if self.listener_escape.fetch_and_is_escape():
-                self.flag_exit()
 
     def cleanup(self):
         print("cleanup")

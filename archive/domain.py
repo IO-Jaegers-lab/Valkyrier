@@ -24,7 +24,7 @@ class Domain:
 
     def process(self):
         self.crawler.load()
-        time.sleep(2)
+        time.sleep(1.5)
 
     def done(self):
         self.crawler.done()
