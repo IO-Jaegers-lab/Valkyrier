@@ -47,6 +47,15 @@
 				$linkToResource
 			);
 		}
+		
+		public function execute(): ?string
+		{
+			$rtValue = curl_exec(
+				$this->getHandler()
+			);
+			
+			return $rtValue;
+		}
 	
 		/**
 		 * @param mixed $option
