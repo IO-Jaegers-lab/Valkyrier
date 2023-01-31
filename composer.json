@@ -1,25 +1,38 @@
 {
     "name": "io-jaegers/valkyrier",
     "type": "project",
+
     "license": "MIT",
-    "autoload": 
+
+    "autoload":
     {
-        "psr-4": 
+        "psr-4":
         {
-            "IOJaegers\\Valkyrier\\": "code/"
+            "IOJaegers\\Valkyrier\\": "code/valkyrier"
         }
     },
-    "authors": 
+
+    "authors":
     [
         {
             "name": "kent vejrup madsen",
             "email": "kent.vejrup.madsen@outlook.com"
         }
     ],
+
     "minimum-stability": "dev",
-    "require": 
+
+    "require":
     {
         "ext-curl":"*",
-        "ext-dom": "*"
+        "ext-dom": "*",
+
+        "ext-mbstring": "*",
+
+        "vlucas/phpdotenv": "^5.5@dev"
+    },
+    "scripts":
+    {
+        "application": "IOJaegers\\Valkyrier\\ApplicationEntry::Main"
     }
 }

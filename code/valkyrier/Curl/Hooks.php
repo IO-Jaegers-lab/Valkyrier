@@ -1,7 +1,10 @@
 <?php
-    namespace IOJaegers\Valkyrier;
+	declare(strict_types=1);
+	declare(encoding='UTF-8');
+ 
+	namespace Curl;
 
-	use \CurlHandle;
+	use CurlHandle;
 	
 	/**
 	 *

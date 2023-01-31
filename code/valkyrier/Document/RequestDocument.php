@@ -1,13 +1,17 @@
 <?php
+	declare(strict_types=1);
+	declare(encoding='UTF-8');
+	
 	/**
 	 *
 	 */
-	namespace IOJaegers\Valkyrier;
+	namespace Document;
 	
+	use Curl\Hooks;
 	use DOMDocument;
-	
-	
-	/**
+
+
+/**
 	 *
 	 */
 	class RequestDocument
@@ -15,7 +19,7 @@
 	{
 		// Constructors
 		/**
-		 *
+		 * @param string $url
 		 */
 		public function __construct(
 			string $url
@@ -54,6 +58,7 @@
 		
 		// Variables
 		private ?string $url = null;
+		
 		private ?string $content = null;
 		
 		
