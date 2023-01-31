@@ -10,7 +10,6 @@
 
 	use IOJaegers\Valkyrier\Curl\Hook;
 	use ReturnableResultOption;
-	use Exception;
 
 	/**
 	 *

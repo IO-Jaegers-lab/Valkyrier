@@ -52,7 +52,9 @@
 		
 		protected final function deleteHook(): void
 		{
-			unset($this->hook);
+			unset(
+				$this->hook
+			);
 		}
 		
 		public final function applyOption(
@@ -84,17 +86,17 @@
 		 */
 		public final function open(): void
 		{
-			if( $this->isHookSet() )
+			if( $this->isHookNull() )
 			{
-				return;
+				$this->setHook(
+					new Hook()
+				);
 			}
 			
-			$this->setHook(
-				new Hook()
-			);
-			
 			$this->setExecuteEvent(
-				$this->getHook()
+				new OnExecuteEvent(
+					$this->getHook()
+				)
 			);
 			
 			$this->setup();
@@ -114,7 +116,8 @@
 			$result = null;
 			
 			if(
-				$this->getExecuteEvent()->getState()
+				$this->getExecuteEvent()
+					 ->getState()
 				==
 				ReturnCurlMessageState::RETURN_RESULT
 			)
@@ -195,6 +198,9 @@
 			$this->outputBuffer = $outputBuffer;
 		}
 		
+		/**
+		 * @return bool
+		 */
 		public final function isOutputBufferSet(): bool
 		{
 			return isset(
@@ -208,6 +214,16 @@
 		public final function isHookSet(): bool
 		{
 			return isset(
+				$this->hook
+			);
+		}
+		
+		/**
+		 * @return bool
+		 */
+		public final function isHookNull(): bool
+		{
+			return is_null(
 				$this->hook
 			);
 		}
@@ -238,6 +254,16 @@
 		): void
 		{
 			$this->executeEvent = $executeEvent;
+		}
+		
+		/**
+		 * @return bool
+		 */
+		public final function isExecuteEventNull(): bool
+		{
+			return is_null(
+				$this->executeEvent
+			);
 		}
 	}
 ?>
