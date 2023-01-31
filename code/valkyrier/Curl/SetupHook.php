@@ -58,28 +58,36 @@
 		protected static function query(): void
 		{
 			if(
-				function_exists(self::CurlInit)
+				function_exists(
+					self::CurlInit
+				)
 			)
 			{
 				self::setIsCurlInitFound( TRUE );
 			}
 			
 			if(
-				function_exists(self::CurlSetOpt)
+				function_exists(
+					self::CurlSetOpt
+				)
 			)
 			{
 				self::setIsCurlSetOptionFound( TRUE );
 			}
 			
 			if(
-				function_exists(self::CurlClose)
+				function_exists(
+					self::CurlClose
+				)
 			)
 			{
 				self::setIsCurlCloseFound( TRUE );
 			}
 			
 			if(
-				function_exists(self::CurlExecute)
+				function_exists(
+					self::CurlExecute
+				)
 			)
 			{
 				self::setIsCurlExecuteFound( TRUE );

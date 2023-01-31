@@ -33,12 +33,14 @@
 			}
 		}
 	
+		// Variables
 		private ?int $optionKey = null;
 		
+		// Accessors
 		/**
 		 * @return bool
 		 */
-		public function isOptionKeySet():bool
+		public final function isOptionKeySet():bool
 		{
 			return isset(
 				$this->optionKey
@@ -48,10 +50,11 @@
 		public abstract function getOption(): mixed;
 		
 		
+		//
 		/**
 		 * @return int
 		 */
-		public function getOptionKey(): int
+		public final function getOptionKey(): int
 		{
 			return $this->optionKey;
 		}
@@ -60,7 +63,7 @@
 		 * @param int $optionKey
 		 * @return void
 		 */
-		public function setOptionKey(
+		public final function setOptionKey(
 			int $optionKey
 		): void
 		{

@@ -64,8 +64,13 @@
 				$value
 			);
 		}
-		
-		public function wrapperApplyOption(
+	
+		// Wrapper functions
+		/**
+		 * @param HookOption $optionToBeApplied
+		 * @return void
+		 */
+		public final function wrapperApplyOption(
 			HookOption $optionToBeApplied
 		): void
 		{
@@ -75,8 +80,10 @@
 			);
 		}
 
+		// Variables
         private ?CurlHandle $handler = null;
 	
+		// Accessors
 		/**
 		 * @return CurlHandle|null
 		 */
