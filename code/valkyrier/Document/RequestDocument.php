@@ -10,6 +10,7 @@
 	
 	use DOMDocument;
 	use IOJaegers\Valkyrier\Curl\HookFacade;
+	use IOJaegers\Valkyrier\Curl\Options\SetCurlUrlOption;
 
 
 	/**
@@ -31,8 +32,6 @@
 			$this->setUrl(
 				$url
 			);
-			
-			
 		}
 		
 		/**
@@ -45,10 +44,6 @@
 			unset(
 				$this->url
 			);
-			
-			unset(
-				$this->content
-			);
 		}
 		
 		
@@ -59,15 +54,18 @@
 		 */
 		protected function setup(): void
 		{
-		
+			$url_options = new SetCurlUrlOption(
+				$this->getUrl()
+			);
+			
+			$this->getHook()
+				 ->wrapperApplyOption(
+					 $url_options
+			);
 		}
 		
 		// Variables
 		private ?string $url = null;
-		
-		private ?string $content = null;
-		
-		
 		
 		/**
 		 * @return string|null
@@ -88,39 +86,17 @@
 		}
 		
 		/**
-		 * @return string|null
-		 */
-		public function getContent(): ?string
-		{
-			return $this->content;
-		}
-		
-		/**
-		 * @param string|null $content
-		 */
-		public function setContent(
-			?string $content
-		): void
-		{
-			$this->content = $content;
-		}
-		
-		/**
 		 * @return DOMDocument|null
 		 */
 		public function convertToDom(): ?DOMDocument
 		{
-			if(
-				isset(
-					$this->content
-				)
-			)
+			if( $this->isOutputBufferSet() )
 			{
 				$document = new DOMDocument();
 				$document->preserveWhiteSpace = false;
 				
 				@$document->loadHTML(
-					$this->getContent()
+					$this->getOutputBuffer()
 				);
 				
 				return $document;

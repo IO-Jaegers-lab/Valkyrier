@@ -24,15 +24,7 @@
 		 */
 		public function __construct()
 		{
-			$this->setHook(
-				new Hook()
-			);
-			
-			$this->setExecuteEvent(
-				$this->getHook()
-			);
-			
-			$this->setup();
+			$this->open();
 		}
 		
 		/**
@@ -84,9 +76,20 @@
 		 */
 		public function open(): void
 		{
+			if( $this->isHookSet() )
+			{
+				return;
+			}
+			
 			$this->setHook(
 				new Hook()
 			);
+			
+			$this->setExecuteEvent(
+				$this->getHook()
+			);
+			
+			$this->setup();
 		}
 		
 		/**
