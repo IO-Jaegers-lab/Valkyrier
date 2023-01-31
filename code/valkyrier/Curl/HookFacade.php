@@ -39,13 +39,23 @@
 			
 			if( $this->isExecuteEventSet() )
 			{
-				unset(
-					$this->executeEvent
-				);
+				$this->deleteExecuteEvent();
 			}
 		}
 		
-		public function applyOption(
+		protected final function deleteExecuteEvent(): void
+		{
+			unset(
+				$this->executeEvent
+			);
+		}
+		
+		protected final function deleteHook(): void
+		{
+			unset($this->hook);
+		}
+		
+		public final function applyOption(
 			HookOption $option
 		): void
 		{
@@ -61,20 +71,18 @@
 		/**
 		 * @return void
 		 */
-		public function close(): void
+		public final function close(): void
 		{
 			if( $this->isHookSet() )
 			{
-				unset(
-					$this->hook
-				);
+				$this->deleteHook();
 			}
 		}
 		
 		/**
 		 * @return void
 		 */
-		public function open(): void
+		public final function open(): void
 		{
 			if( $this->isHookSet() )
 			{
@@ -95,7 +103,7 @@
 		/**
 		 * @return bool
 		 */
-		public function executeCall(): bool
+		public final function executeCall(): bool
 		{
 			if( $this->isExecuteEventSet() )
 			{
@@ -130,13 +138,9 @@
 		/**
 		 * @return void
 		 */
-		public function reset(): void
+		public final function reset(): void
 		{
-			if( $this->isHookSet() )
-			{
-				$this->close();
-			}
-			
+			$this->close();
 			$this->open();
 		}
 		
@@ -176,7 +180,7 @@
 		/**
 		 * @return string|null
 		 */
-		public function getOutputBuffer(): ?string
+		public final function getOutputBuffer(): ?string
 		{
 			return $this->outputBuffer;
 		}
@@ -184,14 +188,14 @@
 		/**
 		 * @param string|null $outputBuffer
 		 */
-		public function setOutputBuffer(
+		public final function setOutputBuffer(
 			?string $outputBuffer
 		): void
 		{
 			$this->outputBuffer = $outputBuffer;
 		}
 		
-		public function isOutputBufferSet(): bool
+		public final function isOutputBufferSet(): bool
 		{
 			return isset(
 				$this->outputBuffer
@@ -211,7 +215,7 @@
 		/**
 		 * @return bool
 		 */
-		public function isExecuteEventSet(): bool
+		public final function isExecuteEventSet(): bool
 		{
 			return isset(
 				$this->executeEvent
@@ -221,7 +225,7 @@
 		/**
 		 * @return OnExecuteEvent|null
 		 */
-		public function getExecuteEvent(): ?OnExecuteEvent
+		public final function getExecuteEvent(): ?OnExecuteEvent
 		{
 			return $this->executeEvent;
 		}
@@ -229,7 +233,7 @@
 		/**
 		 * @param OnExecuteEvent|null $executeEvent
 		 */
-		public function setExecuteEvent(
+		public final function setExecuteEvent(
 			?OnExecuteEvent $executeEvent
 		): void
 		{
