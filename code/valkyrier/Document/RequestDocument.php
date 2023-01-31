@@ -1,21 +1,27 @@
 <?php
+	declare(
+		encoding='UTF-8'
+	);
+	
 	/**
 	 *
 	 */
-	namespace IOJaegers\Valkyrier;
+	namespace IOJaegers\Valkyrier\Document;
 	
 	use DOMDocument;
-	
-	
+	use IOJaegers\Valkyrier\Curl\HookFacade;
+	use IOJaegers\Valkyrier\Curl\Options\SetCurlUrlOption;
+
+
 	/**
 	 *
 	 */
 	class RequestDocument
-		extends Hooks
+		extends HookFacade
 	{
 		// Constructors
 		/**
-		 *
+		 * @param string $url
 		 */
 		public function __construct(
 			string $url
@@ -25,14 +31,6 @@
 			
 			$this->setUrl(
 				$url
-			);
-			
-			$this->setCURLUrl(
-				$this->getUrl()
-			);
-			
-			$this->setContent(
-				$this->execute()
 			);
 		}
 		
@@ -46,17 +44,28 @@
 			unset(
 				$this->url
 			);
+		}
+		
+		
+		
+		
+		/**
+		 * @return void
+		 */
+		protected function setup(): void
+		{
+			$url_options = new SetCurlUrlOption(
+				$this->getUrl()
+			);
 			
-			unset(
-				$this->content
+			$this->getHook()
+				 ->wrapperApplyOption(
+					 $url_options
 			);
 		}
 		
 		// Variables
 		private ?string $url = null;
-		private ?string $content = null;
-		
-		
 		
 		/**
 		 * @return string|null
@@ -77,39 +86,17 @@
 		}
 		
 		/**
-		 * @return string|null
-		 */
-		public function getContent(): ?string
-		{
-			return $this->content;
-		}
-		
-		/**
-		 * @param string|null $content
-		 */
-		public function setContent(
-			?string $content
-		): void
-		{
-			$this->content = $content;
-		}
-		
-		/**
 		 * @return DOMDocument|null
 		 */
 		public function convertToDom(): ?DOMDocument
 		{
-			if(
-				isset(
-					$this->content
-				)
-			)
+			if( $this->isOutputBufferSet() )
 			{
 				$document = new DOMDocument();
 				$document->preserveWhiteSpace = false;
 				
 				@$document->loadHTML(
-					$this->getContent()
+					$this->getOutputBuffer()
 				);
 				
 				return $document;

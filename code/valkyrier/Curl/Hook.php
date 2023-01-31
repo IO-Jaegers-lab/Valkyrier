@@ -1,25 +1,27 @@
 <?php
-    namespace IOJaegers\Valkyrier;
+	declare(
+		encoding='UTF-8'
+	);
+ 
+	namespace IOJaegers\Valkyrier\Curl;
 
-	use \CurlHandle;
+	use CurlHandle;
 	
 	/**
 	 *
 	 */
-    class Hooks
+    class Hook
     {
 		/**
 		 *
 		 */
         public function __construct()
         {
-			SetupHooks::validateRequirements();
+			SetupHook::validateRequirements();
 			
 			$this->setHandler(
 				curl_init()
 			);
-			
-			$this->setOption(CURLOPT_RETURNTRANSFER, 1);
         }
 	
 		/**
@@ -31,33 +33,19 @@
 				$this->getHandler()
 			);
 			
-			unset( $this->handler );
-        }
-	
-		/**
-		 * @param string $linkToResource
-		 * @return void
-		 */
-		public function setCURLUrl(
-			string $linkToResource
-		): void
-		{
-			$this->setOption(
-				CURLOPT_URL,
-				$linkToResource
+			unset(
+				$this->handler
 			);
-		}
+        }
 	
 		/**
 		 * @return string|null
 		 */
 		public final function execute(): ?string
 		{
-			$rtValue = curl_exec(
+			return curl_exec(
 				$this->getHandler()
 			);
-			
-			return $rtValue;
 		}
 	
 		/**
@@ -76,9 +64,26 @@
 				$value
 			);
 		}
+	
+		// Wrapper functions
+		/**
+		 * @param HookOption $optionToBeApplied
+		 * @return void
+		 */
+		public final function wrapperApplyOption(
+			HookOption $optionToBeApplied
+		): void
+		{
+			$this->setOption(
+				$optionToBeApplied->getOptionKey(),
+				$optionToBeApplied->getOption()
+			);
+		}
 
+		// Variables
         private ?CurlHandle $handler = null;
 	
+		// Accessors
 		/**
 		 * @return CurlHandle|null
 		 */

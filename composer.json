@@ -1,25 +1,85 @@
 {
     "name": "io-jaegers/valkyrier",
     "type": "project",
+
     "license": "MIT",
-    "autoload": 
+    "homepage": "https://github.com/IO-Jaegers/Valkyrier",
+    "description": "",
+
+    "readme": "Readme.md",
+
+    "keywords":
+    [
+        "valkyrier", "io-jægers",
+        "curl", "network", "internet", "website", "websites",
+        "crawler", "webcrawler", "traveler",
+        "php8.2-fpm", "php",
+        "linux",
+        "python"
+    ],
+
+    "support":
     {
-        "psr-4": 
+        "issues": "https://github.com/IO-Jaegers/Valkyrier/issues",
+        "source": "https://github.com/IO-Jaegers/Valkyrier",
+        "email": "support@cloud.iojaegers.com"
+    },
+
+    "autoload":
+    {
+        "psr-4":
         {
-            "IOJaegers\\Valkyrier\\": "code/"
+            "IOJaegers\\Valkyrier\\": "code/valkyrier"
+        },
+        "exclude-from-classmap":
+        [
+            "/code/tests"
+        ]
+    },
+
+    "autoload-dev":
+    {
+        "psr-4":
+        {
+            "IOJaegers\\Tests\\": "code/tests"
         }
     },
-    "authors": 
+
+    "authors":
     [
         {
             "name": "kent vejrup madsen",
-            "email": "kent.vejrup.madsen@outlook.com"
+            "email": "kent.vejrup.madsen@outlook.com",
+            "homepage": "https://www.designermadsen.dk"
         }
     ],
+
     "minimum-stability": "dev",
-    "require": 
+    "prefer-stable": true,
+
+    "require":
     {
-        "ext-curl":"*",
-        "ext-dom": "*"
-    }
+        "ext-curl": "*",
+        "ext-dom": "*",
+
+        "ext-mbstring": "*",
+        "ext-apcu": "*"
+    },
+
+    "require-dev":
+    {
+        "vlucas/phpdotenv": "^5.5@dev"
+    },
+
+    "suggest":
+    {
+
+    },
+
+    "scripts":
+    {
+        "application": "IOJaegers\\Valkyrier\\ApplicationEntry::Main"
+    },
+
+    "abandoned": false
 }

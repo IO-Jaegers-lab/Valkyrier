@@ -1,14 +1,20 @@
 <?php
+	declare(
+		encoding='UTF-8'
+	);
+	
 	/**
 	 *
 	 */
-	namespace IOJaegers\Valkyrier;
+	namespace IOJaegers\Valkyrier\Document;
 	
-	use \DOMDocument;
-	use \DOMNodeList;
-	use \DOMElement;
-	
-	
+	use DOMDocument;
+	use DOMElement;
+	use DOMNodeList;
+
+	/**
+	 *
+	 */
 	class Extractor
 	{
 		protected static function hasHost(

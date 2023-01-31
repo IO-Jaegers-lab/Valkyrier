@@ -1,12 +1,16 @@
 <?php
+	declare(
+		encoding='UTF-8'
+	);
+	
 	/**
 	 *
 	 */
-    namespace IOJaegers\Valkyrier;
+    namespace IOJaegers\Valkyrier\Document;
 
 	use DOMDocument;
-	use DOMXPath;
 	use DOMNodeList;
+	use DOMXPath;
 
 
 	/**
@@ -19,7 +23,7 @@
 		 */
         public function __construct()
         {
-            
+        
         }
 	
 		/**
