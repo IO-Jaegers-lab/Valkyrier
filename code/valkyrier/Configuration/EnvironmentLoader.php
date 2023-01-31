@@ -1,8 +1,5 @@
 <?php
 	declare(
-		strict_types=1
-	);
-	declare(
 		encoding='UTF-8'
 	);
 	/**
@@ -17,24 +14,31 @@
 	 */
 	class EnvironmentLoader
 	{
-		private $enviroment = null;
+		//
+		private static ?Dotenv $environment = null;
 		
+		// Accessors
 		/**
-		 * @return null
+		 * @return Dotenv|null
 		 */
-		public function getEnviroment()
+		public static function getEnvironment(): ?Dotenv
 		{
-			return $this->enviroment;
+			return self::$environment;
 		}
 		
 		/**
-		 * @param null $enviroment
+		 * @param Dotenv|null $environment
+		 * @return void
 		 */
-		public function setEnviroment($enviroment): void
+		public static function setEnvironment(
+			?Dotenv $environment
+		): void
 		{
-			$this->enviroment = $enviroment;
+			self::$environment = $environment;
 		}
 		
+		
+		//
 		/**
 		 * @return void
 		 */
@@ -59,16 +63,18 @@
 				$path
 			);
 			
-			$env = Dotenv::createImmutable( self::currentPath(),
-											$found
+			$env = Dotenv::createImmutable(
+				self::currentPath(),
+				$found
 			);
 			
-			$env->load();
+			$env->safeLoad();
 			
-			self::setEnviroment(
+			self::setEnvironment(
 				$env
 			);
 		}
+		
 		
 		/**
 		 * @param array $found
@@ -81,30 +87,34 @@
 		): ?array
 		{
 			$returnValue = array();
-			$sizeOfFound = sizeof($found);
+			
+			$sizeOfFound = sizeof(
+				$found
+			);
+			
 			$idx = null;
 			
 			for(
-				$idx = 0;
+				$idx = self::zero;
 				$idx < $sizeOfFound;
-				$idx++
+				$idx ++
 			)
 			{
 				$item = $found[$idx];
 				
 				$path = $root . '/' . $item;
 				
-				$info = pathinfo($path);
+				$info = pathinfo( $path );
 				
 				if(
 					isset(
-						$info[ 'extension' ]
+						$info[ self::fileExtensionKey ]
 					)
 				)
 				{
 					if(
 						is_file( $path ) &&
-						$info[ 'extension' ] == 'env'
+						$info[ self::fileExtensionKey ] == self::fileExtension
 					)
 					{
 						array_push(
@@ -117,6 +127,10 @@
 			
 			return $returnValue;
 		}
+		
+		private const fileExtensionKey = 'extension';
+		private const fileExtension = 'env';
+		private const zero = 0;
 		
 		
 		/**

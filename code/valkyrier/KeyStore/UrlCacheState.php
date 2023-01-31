@@ -1,11 +1,12 @@
 <?php
-	declare(strict_types=1);
-	declare(encoding='UTF-8');
+	declare(
+		encoding='UTF-8'
+	);
 	
 	/**
 	 *
 	 */
-	namespace KeyStore;
+	namespace IOJaegers\Valkyrier\KeyStore;
 	
 	
 	class UrlCacheState

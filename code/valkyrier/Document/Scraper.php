@@ -1,18 +1,19 @@
 <?php
-	declare(strict_types=1);
-	declare(encoding='UTF-8');
+	declare(
+		encoding='UTF-8'
+	);
 	
 	/**
 	 *
 	 */
-    namespace Document;
+    namespace IOJaegers\Valkyrier\Document;
 
 	use DOMDocument;
-use DOMNodeList;
-use DOMXPath;
+	use DOMNodeList;
+	use DOMXPath;
 
 
-/**
+	/**
 	 *
 	 */
     class Scraper

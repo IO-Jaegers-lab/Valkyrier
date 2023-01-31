@@ -1,21 +1,22 @@
 <?php
-	declare(strict_types=1);
-	declare(encoding='UTF-8');
+	declare(
+		encoding='UTF-8'
+	);
 	
 	/**
 	 *
 	 */
-	namespace Document;
+	namespace IOJaegers\Valkyrier\Document;
 	
-	use Curl\Hooks;
 	use DOMDocument;
+	use IOJaegers\Valkyrier\Curl\HookFacade;
 
 
-/**
+	/**
 	 *
 	 */
 	class RequestDocument
-		extends Hooks
+		extends HookFacade
 	{
 		// Constructors
 		/**
@@ -31,13 +32,7 @@
 				$url
 			);
 			
-			$this->setCURLUrl(
-				$this->getUrl()
-			);
 			
-			$this->setContent(
-				$this->execute()
-			);
 		}
 		
 		/**
@@ -54,6 +49,17 @@
 			unset(
 				$this->content
 			);
+		}
+		
+		
+		
+		
+		/**
+		 * @return void
+		 */
+		protected function setup(): void
+		{
+		
 		}
 		
 		// Variables

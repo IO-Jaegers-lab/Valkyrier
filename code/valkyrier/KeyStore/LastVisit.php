@@ -3,12 +3,16 @@
 		encoding='UTF-8'
 	);
 	
+	/**
+	 *
+	 */
 	namespace IOJaegers\Valkyrier\KeyStore;
+
 	
 	/**
 	 *
 	 */
-	class UrlStoreCache
+	class LastVisit
 	{
 		public function __construct()
 		{
@@ -19,7 +23,5 @@
 		{
 		
 		}
-		
-		
 	}
 ?>

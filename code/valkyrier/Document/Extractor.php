@@ -1,18 +1,21 @@
 <?php
-	declare(strict_types=1);
-	declare(encoding='UTF-8');
+	declare(
+		encoding='UTF-8'
+	);
 	
 	/**
 	 *
 	 */
-	namespace Document;
+	namespace IOJaegers\Valkyrier\Document;
 	
 	use DOMDocument;
-use DOMElement;
-use DOMNodeList;
+	use DOMElement;
+	use DOMNodeList;
 
-
-class Extractor
+	/**
+	 *
+	 */
+	class Extractor
 	{
 		protected static function hasHost(
 			$url
